@@ -56,6 +56,16 @@ main {
     height: 100dvh;
     max-width: 2000px;
     color: rgba(255,255,255,0.65);
+    opacity: 1;
+    animation: main-animation 1.5s ease;
+}
+@keyframes main-animation {
+    0%, 35% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 main > div {
     position: relative;
@@ -260,9 +270,6 @@ main .grid-solar .grid-line-vertical {
     width: 6.5dvh;
 }
 
-
-
-
 main .grid-battery .grid-line.grid-line-vertical {
     bottom: 0;
     left: 50%;
@@ -283,8 +290,13 @@ aside {
     padding: 1.25em 1.25em;
     width: fit-content;
     left: 50%;
-    transform: translateX(-50%);
     bottom: 1.5em;
+    transform: translateX(-50%) translateY(80%);
+    transition: 450ms ease;
+    animation: menu-animation 1.5s ease;
+}
+aside:hover {
+    transform: translateX(-50%) translateY(0%);
 }
 aside::before {
     content: '';
@@ -297,6 +309,26 @@ aside::before {
     mix-blend-mode: multiply;
     border-radius: 1.25em;
     z-index: -1;
+}
+aside::after {
+    content: '';
+    left: -1.5em;
+    top: -1.5em;
+    right: -1.5em;
+    bottom: -1.5em;
+    position: absolute;
+    z-index: -2;
+}
+@keyframes menu-animation {
+    0%, 15% {
+        transform: translateX(-50%) translateY(125%);
+    }
+    65% {
+        transform: translateX(-50%) translateY(45%);
+    }
+    100% {
+        transform: translateX(-50%) translateY(80%);
+    }
 }
 aside ul {
     list-style: none;
