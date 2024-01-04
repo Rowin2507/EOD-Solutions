@@ -1,0 +1,422 @@
+/* GLOBAAL EN EERSTE DEFINIËRING */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+:root {
+    --color-white: #FFFFFF;
+    --color-dark-purple: #160517;
+    --color-green: rgb(165, 240, 17);
+    --primary-font: 'Roboto', sans-serif;
+}
+::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+    opacity: 1;
+}
+::-ms-input-placeholder {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+
+body {
+    height: 100%;
+    font-family: var(--primary-font);
+    font-size: 18px;
+    background-color: rgb(28, 6, 33);
+    color: var(--color-white);
+}
+body::before{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 150vw;
+    width: 100%;
+    background-image: radial-gradient(circle, rgba(115, 37, 111, 0.45) 15%, rgba(28,6,33,0) 75%);
+    transform: translateY(-75%);
+    z-index: -1;
+}
+
+
+main img {
+    width: 15em;
+}
+
+main {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    padding: 5em;
+
+    height: 100dvh;
+    max-width: 2000px;
+    color: rgba(255,255,255,0.65);
+}
+main > div {
+    position: relative;
+    /* border: 1px solid grey; */
+    display: grid;
+    place-items: center;
+}
+main > div::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 5em;
+    height: 0.25em;
+    width: 3em;
+    transform: translateX(-50%);
+    background-color: var(--color-white);
+    border-radius: 1em;
+}
+main > div.active::after {
+    background-color: var(--color-green);
+}
+main .grid-stedin {
+    grid-column: 1 / 4;
+    grid-row: 1 / 3;
+}
+main .grid-schouten {
+    grid-column: 4 / 6;
+    grid-row: 1 / 3;
+}
+main .grid-charger {
+    grid-column: 6 / 9;
+    grid-row: 1 / 3;
+}
+main .grid-wind {
+    grid-column: 9 / 11;
+    grid-row: 1 / 3;
+}
+main .grid-solar {
+    grid-column: 11 / 13;
+    grid-row: 1 / 3;
+}
+main .grid-transformer {
+    grid-column: 3 / 5;
+    grid-row: 3 / 4;
+}
+main .grid-battery {
+    grid-column: 4 / 10;
+    grid-row: 4 / 6;
+    font-size: 0.9em;
+}
+main .grid-battery::after {
+    display: none;
+}
+main .grid-battery ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25em;
+}
+main .grid-battery ul li > svg polyline {
+    transition: 350ms ease-in-out;
+}
+main .grid-battery.active ul li > svg polyline {
+    color: var(--color-green);
+}
+main .grid-battery ul li > span {
+    display: block;
+    position: relative;
+    height: 0.2em;
+    width: 15em;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 1em;
+}
+main .grid-battery ul li > span > span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0%;
+    height: 100%;
+    background-color: var(--color-green);
+    box-shadow: 0 0.15em 1.25em rgba(165, 240, 17, 0.75);
+    border-radius: 1em;
+    transition: 500ms ease-in-out width;
+}
+main .grid-battery ul li > strong {
+    font-weight: 400;
+    color: rgba(255,255,255,0.65);
+    transition: 350ms ease-in-out;
+}
+main .grid-battery.active ul li > strong {
+    color: rgba(255,255,255,1);
+}
+
+
+
+/* GRID ANIMATIONS LINES */
+main .grid-line {
+    display: block;
+    position: absolute;
+    bottom: -25%;
+
+    /* height: 0.15rem; */
+    height: 3px;
+    width: 100%;
+    background-image: linear-gradient(90deg, rgba(62,43,66,1) 0%, rgba(62,43,66,1) 50%, rgba(62,43,66,1) 50%, rgba(62,43,66,1) 100%);
+    background-size: 1.5rem;
+    background-position: 0rem;
+    animation: grid-line-active-forward 5s linear infinite;
+    animation-play-state: paused;
+    transform: translateX(calc(0.15rem / -2));
+}
+main > div.active .grid-line {
+    background-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%);
+    animation-play-state: running;
+}
+main .grid-line-vertical {
+    transform: rotate(90deg) translateX(-100%);
+    transform-origin: 0;
+    /* height: 0.175rem; */
+    height: 3px;
+}
+main .grid-line-flipped {
+    animation: grid-line-active-backwards 5s linear infinite;
+}
+@keyframes grid-line-active-forward {
+    to {
+      background-position: 15rem;
+    }
+}
+@keyframes grid-line-active-backwards {
+    to {
+      background-position: -15rem;
+    }
+}
+
+
+main .grid-stedin .grid-line {
+    left: 50%;
+    width: 25%;
+    width: 84%;
+}
+main .grid-stedin .grid-line-vertical {
+    left: 50%;
+    width: 6.5dvh;
+}
+main .grid-stedin.grid-line-flipped .grid-line {
+    animation: grid-line-active-backwards 5s linear infinite;
+}
+main .grid-schouten .grid-line {
+    left: 50%;
+    width: 100%;
+}
+main .grid-schouten .grid-line-vertical {
+    left: 50%;
+    width: 6.5dvh;
+}
+main > .grid-schouten.guide-line-active .grid-line:first-of-type {
+    background-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%);
+    animation-play-state: running;
+}
+main .grid-charger .grid-line {
+    left: 33%;
+    width: 17.5%;
+}
+main .grid-charger .grid-line-vertical {
+    left: 50%;
+    width: 6.5dvh;
+}
+main > .grid-charger.active .grid-line {
+    background-image: linear-gradient(90deg, rgba(62,43,66,1) 0%, rgba(62,43,66,1) 50%, rgba(62,43,66,1) 50%, rgba(62,43,66,1) 100%);
+    animation-play-state: paused;
+}
+main > .grid-charger.active .grid-line-vertical {
+    background-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%);
+    animation-play-state: running;
+}
+main > .grid-charger.guide-line-active .grid-line:first-of-type {
+    background-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%);
+    animation-play-state: running;
+}
+main .grid-wind .grid-line:first-of-type {
+    left: 50%;
+    width: 125%;
+    transform: translateX(-100%);
+}
+main .grid-wind .grid-line-vertical {
+    left: 50%;
+    width: 6.5dvh;
+}
+main > .grid-wind.guide-line-active .grid-line:first-of-type {
+    background-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 100%);
+    animation-play-state: running;
+}
+main .grid-solar .grid-line:first-of-type {
+    left: 50%;
+    width: 100%;
+    transform: translateX(-100%);
+}
+main .grid-solar .grid-line-vertical {
+    left: 50%;
+    width: 6.5dvh;
+}
+
+
+
+
+main .grid-battery .grid-line.grid-line-vertical {
+    bottom: 0;
+    left: 50%;
+    /* width: calc((((100dvh - 10em) / 5) - 5px) * 2.5);
+    transform: rotate(90deg) translateX(calc(-100% - 4px)); */
+    /* width: calc((((100dvh - 10em) / 5) - 5px) * 2);
+    transform: rotate(90deg) translateX(calc(-125% - 4px)) translateY(1px); */
+    width: calc((((100dvh - 10em) / 5) - 5px) * 1);
+    transform: rotate(90deg) translateX(calc(-250% - 4px)) translateY(1px);
+}
+main .grid-battery.grid-line-flipped .grid-line {
+    animation: grid-line-active-backwards 5s linear infinite;
+}
+
+/* ZWEVENDE INTERACTIEVE BALK */
+aside {
+    position: fixed;
+    padding: 1.25em 1.25em;
+    width: fit-content;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 1.5em;
+}
+aside::before {
+    content: '';
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.25);
+    mix-blend-mode: multiply;
+    border-radius: 1.25em;
+    z-index: -1;
+}
+aside ul {
+    list-style: none;
+    display: flex;
+    align-items: flex-end;
+}
+aside > ul {
+    gap: 2em;
+}
+aside > ul > li {
+    display: flex;
+    flex-direction: column;
+}
+aside > ul > li > ul {
+    gap: 0.35em;
+}
+
+aside label {
+    opacity: 0.65;
+    font-size: 0.95em;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+}
+aside input, aside select, aside button {
+    appearance: none;
+    outline: none;
+    border: none;
+    padding: 0.75em 1.25em;
+    font-family: var(--primary-font);
+    font-size: 1em;
+    width: 6em;
+    border-radius: 0.35em;
+    background-color: rgba(115, 37, 111, 0.125);
+    color: var(--color-white);
+}
+aside select {
+    cursor: pointer;
+    width: 8.5em;
+    background-image: url('/images/chevron-down.svg');
+    background-position: 90% 50%;
+    background-size: 1.25em;
+    background-repeat: no-repeat;
+}
+aside button {
+    cursor: pointer;
+    width: fit-content;
+    background-color: var(--color-white);
+    color: var(--color-dark-purple);
+    color: rgba(125, 37, 111, 1);
+    box-shadow: 0 0.35em 2em rgba(255, 255, 255, 0.25);
+    font-weight: 500;
+}
+aside input[type=checkbox] {
+    appearance: auto;
+}
+
+.toggle-slider {
+    position: relative;
+    display: inline-block;
+    width: 6.5em;
+    height: 2.8075em;
+    opacity: 1;
+    margin-bottom: 0;
+    font-weight: 400;
+  }
+  .toggle-slider::after {
+    content: 'Nee';
+    display: grid;
+    place-items: center flex-start;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0 1em;
+    height: 100%;
+    pointer-events: none;
+  }
+  .toggle-slider input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+    outline: none;
+  }
+  .toggle-slider-in {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(115, 37, 111, 0.125);
+    border-radius: 0.35em;
+    transition: .3s ease;
+  }
+  .toggle-slider-in:before {
+    position: absolute;
+    content: '';
+    left: 0.5em;
+    top: 0.5em;
+    width: 2.75em;
+    height: calc(100% - 1em);
+    background-color: var(--color-dark-purple);
+    border-radius: 0.15em;
+    transition: .3s ease;
+    z-index: 1;
+  }
+  .toggle-slider-in::after {
+    content: 'Ja';
+    display: grid;
+    place-items: center flex-start;
+    padding: 0 1em;
+    height: 100%;
+  }
+  .toggle-slider:hover .toggle-slider, .toggle-slider:hover .toggle-slider-in {
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.075);
+  }
+  .toggle-slider input:checked + .toggle-slider-in {
+    background-color: rgba(115, 37, 111, 0.85);
+    box-shadow: 0 0.35em 2em rgba(115, 37, 111, 0.5);
+  }
+  .toggle-slider input:checked + .toggle-slider-in:before {
+    background-color: var(--color-white);
+    transform: translateX(100%);
+  }

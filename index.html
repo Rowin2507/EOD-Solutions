@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <meta charset="utf-8">
+    <title>EOD Solutions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="/style/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <div class="grid-stedin">
+            Stedin
+            <span class="grid-line"> <!-- GRID LINE --> </span>
+            <span class="grid-line grid-line-vertical"> <!-- GRID LINE --> </span>
+        </div>
+        <div class="grid-schouten">
+            Schouten
+            <span class="grid-line"> <!-- GRID LINE --> </span>
+            <span class="grid-line grid-line-vertical grid-line-flipped"> <!-- GRID LINE --> </span>
+        </div>
+        <div class="grid-charger">
+            Laadpalen
+            <span class="grid-line"> <!-- GRID LINE --> </span>
+            <span class="grid-line grid-line-vertical grid-line-flipped"> <!-- GRID LINE --> </span>
+        </div>
+        <div class="grid-wind">
+            Wind
+            <span class="grid-line grid-line-flipped"> <!-- GRID LINE --> </span>
+            <span class="grid-line grid-line-vertical"> <!-- GRID LINE --> </span>
+        </div>
+        <div class="grid-solar">
+            Zonnepanelen
+            <span class="grid-line grid-line-flipped"> <!-- GRID LINE --> </span>
+            <span class="grid-line grid-line-vertical"> <!-- GRID LINE --> </span>
+        </div>
+        <div class="grid-transformer">Transformer</div>
+        <div class="grid-battery">
+            <span class="grid-line grid-line-vertical"> <!-- GRID LINE --> </span>
+            <ul>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-battery-charging"><path d="M5 18H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.19M15 6h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3.19"></path><line x1="23" y1="13" x2="23" y2="11"></line><polyline points="11 6 7 12 13 12 9 18"></polyline></svg>
+                </li>
+                <li>
+                    <span>
+                        <span>
+                            <!-- LAADNIVEAU INDICATIE -->
+                        </span>
+                    </span>
+                </li>
+                <li>
+                    <strong>0%</strong>
+                </li>
+            </ul>
+        </div>
+        <!-- <h1>TEST</h1>
+        <img src="/images/EOD-Solutions-logo-wit.png" alt=""> -->
+    </main>
+
+    <aside>
+        <ul>
+            <li>
+                <label for="time">Tijd</label>
+                <select name="time" id="time">
+                    <option value="02:00">02:00 uur</option>
+                    <option value="14:00">14:00 uur</option>
+                    <option value="16:00">16:00 uur</option>
+                    <option value="17:00">17:00 uur</option>
+                </select>
+            </li>
+            <li>
+                <label>Energieprijs</label>
+                <ul>
+                    <li>
+                        <input type="text" name="energy-price-low" placeholder="Laag" id="energy-price-low">
+                    </li>
+                    <li>
+                        <input type="text" name="energy-price-mid" placeholder="Midden" id="energy-price-mid">
+                    </li>
+                    <li>
+                        <input type="text" name="energy-price-high" placeholder="Hoog" id="energy-price-high">
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <label for="charger">Laadpalen</label>
+                <input type="number" name="charger" value="1" min="0" max="5" id="charger">
+            </li>
+            <li>
+                <label for="wind">Windmolen?</label>
+                <label class="toggle-slider">
+                    <input type="checkbox" name="wind" id="wind">
+                    <span class="toggle-slider-in"></span>
+                </label>
+            </li>
+            <li>
+                <label for="solar">Zonnepanelen?</label>
+                <label class="toggle-slider">
+                    <input type="checkbox" name="solar" checked="true" id="solar">
+                    <span class="toggle-slider-in"></span>
+                </label>
+                <!-- <input type="checkbox" name="solar" checked="true" id="solar"> -->
+            </li>
+            <li>
+                <button>Visualiseer</button>
+            </li>
+        </ul>
+    </aside>
+  
+    <script src="/scripts/main.js" type="text/javascript"></script>
+</body>
+</html>
