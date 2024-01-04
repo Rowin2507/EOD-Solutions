@@ -37,12 +37,17 @@ body::before{
     background-image: radial-gradient(circle, rgba(115, 37, 111, 0.45) 15%, rgba(28,6,33,0) 75%);
     transform: translateY(-75%);
     z-index: -1;
+    animation: main-animation 2.5s ease;
+}
+@keyframes gradient-animation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
-
-main img {
-    width: 15em;
-}
 
 main {
     margin: 0 auto;
@@ -51,7 +56,7 @@ main {
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    padding: 5em;
+    padding: 0 5em 10em 5em;
 
     height: 100dvh;
     max-width: 2000px;
@@ -77,15 +82,27 @@ main > div::after {
     content: '';
     position: absolute;
     left: 50%;
-    bottom: 5em;
+    bottom: 0;
     height: 0.25em;
     width: 3em;
     transform: translateX(-50%);
     background-color: var(--color-white);
+    box-shadow: 0 0.15em 1.25em rgba(255, 255, 255, 0.25);
     border-radius: 1em;
+    transition: 450ms;
 }
 main > div.active::after {
     background-color: var(--color-green);
+    box-shadow: 0 0.15em 1.25em rgba(165, 240, 17, 0.75);
+}
+main > div.grid-icon img {
+    height: 14.5em;
+    opacity: 0.25;
+    transition: 450ms;
+    mix-blend-mode: plus-lighter;
+}
+main > div.grid-icon.active img {
+    opacity: 1;
 }
 main .grid-stedin {
     grid-column: 1 / 4;
@@ -116,8 +133,15 @@ main .grid-battery {
     grid-row: 4 / 6;
     font-size: 0.9em;
 }
-main .grid-battery::after {
+main .grid-battery::after, 
+main .grid-transformer::after {
     display: none;
+}
+main .grid-battery {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 main .grid-battery ul {
     list-style: none;
@@ -158,6 +182,22 @@ main .grid-battery ul li > strong {
 }
 main .grid-battery.active ul li > strong {
     color: rgba(255,255,255,1);
+}
+main .grid-battery img {
+    height: auto;
+    width: 22em;
+    margin-bottom: 1.75em;
+    z-index: 1;
+}
+.grid-transformer span {
+    padding: 0.5em 1em;
+    border: 3px solid rgba(62,43,66,1);
+    background-color: inherit;
+    backdrop-filter: blur(5px);
+    transition: 450ms;
+}
+.grid-transformer.active span {
+    border: 3px solid rgba(255,255,255,1);
 }
 
 
@@ -201,8 +241,6 @@ main .grid-line-flipped {
       background-position: -15rem;
     }
 }
-
-
 main .grid-stedin .grid-line {
     left: 50%;
     width: 25%;
@@ -284,6 +322,10 @@ main .grid-battery.grid-line-flipped .grid-line {
     animation: grid-line-active-backwards 5s linear infinite;
 }
 
+
+
+
+
 /* ZWEVENDE INTERACTIEVE BALK */
 aside {
     position: fixed;
@@ -291,13 +333,13 @@ aside {
     width: fit-content;
     left: 50%;
     bottom: 1.5em;
-    transform: translateX(-50%) translateY(80%);
-    transition: 450ms ease;
-    animation: menu-animation 1.5s ease;
-}
-aside:hover {
     transform: translateX(-50%) translateY(0%);
+    transition: 450ms ease;
+    animation: menu-animation 1s ease;
 }
+/* aside:hover {
+    transform: translateX(-50%) translateY(0%);
+} */
 aside::before {
     content: '';
     left: 0;
@@ -323,11 +365,11 @@ aside::after {
     0%, 15% {
         transform: translateX(-50%) translateY(125%);
     }
-    65% {
+    /* 65% {
         transform: translateX(-50%) translateY(45%);
-    }
+    } */
     100% {
-        transform: translateX(-50%) translateY(80%);
+        transform: translateX(-50%) translateY(0%); /* 80% */
     }
 }
 aside ul {
