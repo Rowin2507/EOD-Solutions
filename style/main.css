@@ -194,7 +194,9 @@ main .grid-battery img {
     border: 3px solid rgba(62,43,66,1);
     background-color: inherit;
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     transition: 450ms;
+    z-index: 1;
 }
 .grid-transformer.active span {
     border: 3px solid rgba(255,255,255,1);
